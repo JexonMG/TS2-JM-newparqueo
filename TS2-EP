@@ -5,7 +5,7 @@ import datetime
 conn = psycopg2.connect(host = "localhost", dbname= "basedatos",  user =  "postgres" ,
                         password = "Jexon192005", port="5432")
 cur =   conn.cursor()
-
+ 
 cur.execute("""CREATE TABLE IF NOT EXISTS autos(
     id SERIAL PRIMARY KEY,
     tipo VARCHAR(255),        
