@@ -2,8 +2,8 @@ import psycopg2
 import psycopg2.extras
 import datetime
 
-conn = psycopg2.connect(host = "localhost", dbname= "postgres",  user =  "postgres" ,
-                        password = "1234", port="5432")
+conn = psycopg2.connect(host = "localhost", dbname= "basedatos",  user =  "postgres" ,
+                        password = "Jexon192005", port="5432")
 cur =   conn.cursor()
 
 cur.execute("""CREATE TABLE IF NOT EXISTS autos(
@@ -140,8 +140,7 @@ def informes():
         elif opcion == 3:
             break
         else:
-            print("Opcion incorrecta")
-              
+            print("Opcion incorrecta")             
     conn.commit()
 
 def generar_reporte_ganancias():
@@ -161,23 +160,6 @@ def generar_reporte_vehiculos():
     for marca, conteo in marcas:
         print(f"{marca}: {conteo}")
 
-def reportes():
-    while True:
-        print("----- Reportes -----")
-        print("1. Generar Reporte Ganancias.")
-        print("2. Generar Reporte de Vehículos.")
-        print("3. Salir.")
-        opcion = int(input("Seleccione una opción: "))
-        
-        if opcion == 1:
-            generar_reporte_ganancias()
-        elif opcion == 2:
-            generar_reporte_vehiculos()
-        elif opcion == 3:
-            break
-        else:
-            print("Opción incorrecta")
-    
 def menu():
     print("-----Bienvenido al sistema de ingreso y salida de Vehiculos-----")
     print("****************************************************************")
@@ -185,10 +167,9 @@ def menu():
         print("1. Ingreso de Vehiculo.")
         print("2. Salida de Vehiculo.")
         print("3. Mostrar Vehiculos Ingresados.") 
-        print("4. Informes.")
-        print("5. Borrar historial.")
-        print("6. Reportes.")
-        print("7. Salir.")
+        print("4. Borrar historial.")
+        print("5. Reportes.")
+        print("6. Salir.")
         
         opcion = int(input("Ingrese una opción: "))
         
@@ -199,12 +180,24 @@ def menu():
         elif opcion == 3:
             mostrar_vehiculos_ingresados()
         elif opcion == 4:
-            informes()
-        elif opcion == 5:
             borrar_historial()
+        elif opcion == 5:
+            while True:
+                print("----- Reportes -----")
+                print("1. Generar Reporte Ganancias.")
+                print("2. Generar Reporte de Vehículos.")
+                print("3. Volver al menú principal.")
+                opcion_reportes = int(input("Seleccione una opción de reportes: "))
+                
+                if opcion_reportes == 1:
+                    generar_reporte_ganancias()
+                elif opcion_reportes == 2:
+                    generar_reporte_vehiculos()
+                elif opcion_reportes == 3:
+                    break
+                else:
+                    print("Opción incorrecta")
         elif opcion == 6:
-            reportes()
-        elif opcion == 7:
             break
         else:
             print("Opción incorrecta")
